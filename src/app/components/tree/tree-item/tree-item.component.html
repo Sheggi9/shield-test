@@ -1,0 +1,31 @@
+<div class="location">
+  <div class="location-button location-button__expand" *ngIf="treeItem.subLocations" (click)="toggleSubLocations()">
+    <div class="icon" [class.expanded]="this.isExpanded"></div>
+  </div>
+
+  <div class="location-name">
+    <input [style.width.ch]="newLocationName!.value!.length + 0.5"  class="location-name-form" type="text" [formControl]="newLocationName">
+  </div>
+
+
+  <div class="location-buttons">
+    <div class="location-button location-button__edit" *ngIf="!isEdited; else editButtons" (click)="toggleEdit()">
+      <div class="icon"></div>
+    </div>
+    <ng-template #editButtons>
+      <div class="location-button location-button__save" (click)="setNewLocationName()">
+        <div class="icon"></div>
+      </div>
+      <div class="location-button location-button__cancel" (click)="cancelEdit()">
+        <div class="icon"></div>
+      </div>
+    </ng-template>
+  </div>
+</div>
+
+<div *ngIf="isExpanded && treeItem.subLocations" class="sub-tree">
+  <app-tree [tree]="treeItem.subLocations"></app-tree>
+</div>
+
+
+
